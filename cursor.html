@@ -1,45 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Custom Dot Cursor</title>
-	<style>
+	<title>Custom Cursor</title>
+	<style type="text/css">
 		body {
 			background-color: black;
 			color: white;
-			cursor: none;
+			font-family: Arial, sans-serif;
+			font-size: 16px;
+			line-height: 1.5;
+			cursor: none; /* hide default cursor */
 		}
-		.dot {
-			position: absolute;
+		.custom-cursor {
+			position: fixed;
 			top: 0;
 			left: 0;
 			width: 20px;
 			height: 20px;
 			border-radius: 50%;
 			background-color: white;
-			transform: translate(-50%, -50%);
+			opacity: 0.5;
+			z-index: 9999; /* ensure the cursor is on top */
+			pointer-events: none; /* allow clicks to go through */
+			mix-blend-mode: difference; /* invert colors of elements underneath */
 		}
 	</style>
 </head>
 <body>
-	<div class="dot"></div>
-	<h1>Welcome to my website!</h1>
-	<p>Hover your mouse over the content to see the custom dot cursor in action.</p>
-	<script>
-		let animationId = null;
+	<p>Hover over this text to see the custom cursor.</p>
+	<div class="custom-cursor"></div>
 
-		function updateCursorPosition(e) {
-			const dot = document.querySelector('.dot');
-			dot.style.left = e.pageX + 'px';
-			dot.style.top = e.pageY + 'px';
-		}
-
-		function updateBackgroundColor() {
-			document.body.style.backgroundColor = document.body.style.backgroundColor === 'black' ? 'white' : 'black';
-			animationId = requestAnimationFrame(updateBackgroundColor);
-		}
-
-		document.addEventListener('mousemove', updateCursorPosition);
-		animationId = requestAnimationFrame(updateBackgroundColor);
+	<script type="text/javascript">
+		document.addEventListener("mousemove", function(e) {
+			var customCursor = document.querySelector(".custom-cursor");
+			customCursor.style.left = e.clientX + "px";
+			customCursor.style.top = e.clientY + "px";
+		});
 	</script>
 </body>
 </html>
