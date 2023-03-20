@@ -25,12 +25,21 @@
 	<h1>Welcome to my website!</h1>
 	<p>Hover your mouse over the content to see the custom dot cursor in action.</p>
 	<script>
-		document.addEventListener('mousemove', e => {
+		let animationId = null;
+
+		function updateCursorPosition(e) {
 			const dot = document.querySelector('.dot');
 			dot.style.left = e.pageX + 'px';
 			dot.style.top = e.pageY + 'px';
+		}
+
+		function updateBackgroundColor() {
 			document.body.style.backgroundColor = document.body.style.backgroundColor === 'black' ? 'white' : 'black';
-		});
+			animationId = requestAnimationFrame(updateBackgroundColor);
+		}
+
+		document.addEventListener('mousemove', updateCursorPosition);
+		animationId = requestAnimationFrame(updateBackgroundColor);
 	</script>
 </body>
 </html>
