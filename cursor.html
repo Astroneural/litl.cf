@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Custom Dot Cursor</title>
+	<style>
+		body {
+			background-color: black;
+			color: white;
+			cursor: none;
+		}
+		.dot {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 20px;
+			height: 20px;
+			border-radius: 50%;
+			background-color: white;
+			transform: translate(-50%, -50%);
+		}
+	</style>
+</head>
+<body>
+	<div class="dot"></div>
+	<h1>Welcome to my website!</h1>
+	<p>Hover your mouse over the content to see the custom dot cursor in action.</p>
+	<script>
+		document.addEventListener('mousemove', e => {
+			const dot = document.querySelector('.dot');
+			dot.style.left = e.pageX + 'px';
+			dot.style.top = e.pageY + 'px';
+			document.body.style.backgroundColor = document.body.style.backgroundColor === 'black' ? 'white' : 'black';
+		});
+	</script>
+</body>
+</html>
