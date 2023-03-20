@@ -1,41 +1,51 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Custom Cursor</title>
-	<style type="text/css">
-		body {
-			background-color: black;
-			color: white;
-			font-family: Arial, sans-serif;
-			font-size: 16px;
-			line-height: 1.5;
-			cursor: none; /* hide default cursor */
-		}
-		.custom-cursor {
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 20px;
-			height: 20px;
-			border-radius: 50%;
-			background-color: white;
-			opacity: 0.5;
-			z-index: 9999; /* ensure the cursor is on top */
-			pointer-events: none; /* allow clicks to go through */
-			mix-blend-mode: difference; /* invert colors of elements underneath */
-		}
-	</style>
-</head>
-<body>
-	<p>Hover over this text to see the custom cursor.</p>
-	<div class="custom-cursor"></div>
+  <head>
+    <style>
+      body {
+        height: 100vh;
+        background-color: black;
+        cursor: none;
+      }
+      .dot-cursor {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: white;
+        mix-blend-mode: difference;
+        pointer-events: none;
+        z-index: 9999;
+      }
+      .image-container {
+        position: relative;
+        display: inline-block;
+      }
+      .image-container img {
+        display: block;
+        width: 500px;
+        height: 333px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dot-cursor"></div>
+    <div class="image-container">
+      <img src="https://images.unsplash.com/photo-1679335649136-bd9db9e89bef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80">
+    </div>
+    <script>
+      const cursor = document.querySelector('.dot-cursor');
+      const sensitivityFactor = 10;
 
-	<script type="text/javascript">
-		document.addEventListener("mousemove", function(e) {
-			var customCursor = document.querySelector(".custom-cursor");
-			customCursor.style.left = e.clientX + "px";
-			customCursor.style.top = e.clientY + "px";
-		});
-	</script>
-</body>
+      // Update the position of the cursor on mouse move
+      document.addEventListener('mousemove', e => {
+        const x = e.clientX / sensitivityFactor;
+        const y = e.clientY / sensitivityFactor;
+        cursor.style.top = y + 'px';
+        cursor.style.left = x + 'px';
+      });
+    </script>
+  </body>
 </html>
